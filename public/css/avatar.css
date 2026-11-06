@@ -1,0 +1,385 @@
+/* ==============================================================
+   ECHO — Virtual Interviewer Avatar & Audio Visualizer Aesthetics
+   ============================================================== */
+
+/* Persona Selector Ribbon */
+.interviewer-persona-selector {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  justify-content: center;
+}
+
+.persona-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.persona-chip:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.3);
+  color: var(--text-primary);
+}
+
+.persona-chip.active {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--accent-sky);
+  color: var(--accent-sky);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+.persona-icon {
+  font-size: 0.95rem;
+}
+
+/* Avatar Stage Container */
+.avatar-stage {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+#avatar-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Concentric Ambient Audio Rings */
+.avatar-rings {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  transition: all 0.5s ease;
+}
+
+.ring-1 {
+  width: 155px;
+  height: 155px;
+}
+
+.ring-2 {
+  width: 215px;
+  height: 215px;
+  border-color: rgba(99, 102, 241, 0.12);
+}
+
+.ring-3 {
+  width: 265px;
+  height: 265px;
+  border-color: rgba(139, 92, 246, 0.08);
+}
+
+/* Central Glowing Orb & Portrait */
+.avatar-center-orb {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #38BDF8 0%, #0284C7 45%, #0F172A 100%);
+  box-shadow: 
+    0 0 25px rgba(6, 182, 212, 0.45),
+    inset 0 0 15px rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 3px solid rgba(56, 189, 248, 0.4);
+}
+
+.avatar-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.orb-core {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.95) 0%, rgba(56, 189, 248, 0.5) 60%, transparent 100%);
+  filter: blur(2px);
+  animation: orb-breathe 3.5s ease-in-out infinite;
+}
+
+/* Persona Details & Badge */
+.persona-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.persona-role-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.persona-voice-badge {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--accent-sky);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Live Equalizer Bars */
+.live-equalizer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 20px;
+  margin: 0.4rem 0;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-stage.speaking ~ .live-equalizer,
+.avatar-stage.listening ~ .live-equalizer,
+.live-equalizer.active {
+  opacity: 1;
+}
+
+.eq-bar {
+  width: 4px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--accent-sky);
+  transition: height 0.1s ease;
+}
+
+.avatar-stage.speaking ~ .live-equalizer .eq-bar,
+.live-equalizer.speaking .eq-bar {
+  background: linear-gradient(180deg, #38BDF8, #818CF8);
+  animation: eq-bounce 0.8s ease-in-out infinite alternate;
+}
+
+.avatar-stage.listening ~ .live-equalizer .eq-bar,
+.live-equalizer.listening .eq-bar {
+  background: linear-gradient(180deg, #F43F5E, #FB7185);
+  animation: eq-bounce 0.6s ease-in-out infinite alternate;
+}
+
+.avatar-stage.thinking ~ .live-equalizer .eq-bar,
+.live-equalizer.thinking .eq-bar {
+  background: linear-gradient(180deg, #A855F7, #C084FC);
+  animation: eq-bounce 1.1s ease-in-out infinite alternate;
+}
+
+.eq-bar:nth-child(1) { animation-delay: 0.05s; height: 8px; }
+.eq-bar:nth-child(2) { animation-delay: 0.2s;  height: 16px; }
+.eq-bar:nth-child(3) { animation-delay: 0.35s; height: 12px; }
+.eq-bar:nth-child(4) { animation-delay: 0.15s; height: 18px; }
+.eq-bar:nth-child(5) { animation-delay: 0.3s;  height: 10px; }
+
+/* Interactive State Preview Dock */
+.avatar-controls-dock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.dock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.dock-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.state-test-buttons {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.state-test-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.state-test-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.state-test-btn.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--accent-sky);
+  color: var(--accent-sky);
+}
+
+.cadence-dock-control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cadence-select {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  border-radius: 4px;
+  padding: 0.15rem 0.4rem;
+  font-family: var(--font-sans);
+  outline: none;
+}
+
+/* ==============================================================
+   AVATAR DYNAMIC STATES: IDLE, SPEAKING, LISTENING, THINKING
+   ============================================================== */
+
+/* 1. SPEAKING STATE (Timbre TTS active) */
+.avatar-stage.speaking .ring-1 {
+  animation: ripple-out 1.4s infinite linear;
+  border-color: rgba(56, 189, 248, 0.7);
+}
+
+.avatar-stage.speaking .ring-2 {
+  animation: ripple-out 1.4s infinite linear 0.35s;
+  border-color: rgba(99, 102, 241, 0.6);
+}
+
+.avatar-stage.speaking .ring-3 {
+  animation: ripple-out 1.4s infinite linear 0.7s;
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+.avatar-stage.speaking .avatar-center-orb {
+  box-shadow: 
+    0 0 35px rgba(56, 189, 248, 0.85),
+    0 0 70px rgba(99, 102, 241, 0.45);
+  border-color: var(--accent-sky);
+  transform: scale(1.06);
+}
+
+.avatar-stage.speaking .avatar-portrait {
+  filter: brightness(1.08) contrast(1.05);
+}
+
+/* 2. LISTENING STATE (Prisma STT Recording active) */
+.avatar-stage.listening .avatar-center-orb {
+  border-color: #F43F5E;
+  box-shadow: 0 0 35px rgba(244, 63, 94, 0.8), 0 0 60px rgba(244, 63, 94, 0.35);
+  animation: listening-pulse 1s infinite alternate;
+}
+
+.avatar-stage.listening .ring {
+  border-color: rgba(244, 63, 94, 0.45);
+}
+
+.avatar-stage.listening .avatar-portrait {
+  filter: sepia(0.15) hue-rotate(310deg) saturate(1.2);
+}
+
+/* 3. THINKING / EVALUATING STATE (Evon Reasoning) */
+.avatar-stage.thinking .avatar-center-orb {
+  border-color: #A855F7;
+  box-shadow: 0 0 45px rgba(168, 85, 247, 0.85), 0 0 70px rgba(139, 92, 246, 0.4);
+}
+
+.avatar-stage.thinking .ring-1 {
+  animation: thinking-spin 3s infinite linear;
+  border-color: rgba(168, 85, 247, 0.6);
+  border-style: dashed;
+}
+
+.avatar-stage.thinking .ring-2 {
+  animation: thinking-spin-reverse 4s infinite linear;
+  border-color: rgba(139, 92, 246, 0.4);
+  border-style: dashed;
+}
+
+.avatar-stage.thinking .avatar-portrait {
+  filter: brightness(0.9) hue-rotate(240deg) saturate(1.3);
+}
+
+/* Keyframes */
+@keyframes orb-breathe {
+  0% { transform: scale(0.92); opacity: 0.75; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.92); opacity: 0.75; }
+}
+
+@keyframes ripple-out {
+  0% { transform: scale(0.72); opacity: 0.85; }
+  100% { transform: scale(1.32); opacity: 0; }
+}
+
+@keyframes listening-pulse {
+  0% { transform: scale(1.0); }
+  100% { transform: scale(1.09); }
+}
+
+@keyframes thinking-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes thinking-spin-reverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes eq-bounce {
+  0% { height: 4px; }
+  100% { height: 18px; }
+}

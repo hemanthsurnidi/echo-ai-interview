@@ -1,0 +1,19 @@
+Hemanth Kumar
+Full Stack Python & Cloud Engineer
+Email: hemanth@example.com | Phone: +91 98765 43210
+GitHub: https://github.com/developer/distributed-event-cache
+
+SUMMARY
+High-performance backend engineer with 4+ years of experience designing asynchronous microservices, distributed caching layers, and cloud infrastructure on AWS. Proficient in Python, FastAPI, PostgreSQL, Redis, and Docker.
+
+TECHNICAL SKILLS
+Languages: Python, JavaScript, TypeScript, SQL, Bash
+Frameworks: FastAPI, Django, React, Celery, Pydantic, SQLAlchemy
+Databases: PostgreSQL, Redis, MongoDB
+DevOps & Cloud: Docker, Kubernetes, AWS, GitHub Actions, CI/CD, Linux
+
+PROJECTS
+1. Distributed Event Cache Engine (FastAPI & Redis)
+- Engineered an event-driven pub/sub caching system with sub-15ms p99 response times.
+- Designed idempotency middleware to eliminate duplicate webhooks under at-least-once delivery.
+- Containerized microservices using Docker and orchestrated multi-region deployments.

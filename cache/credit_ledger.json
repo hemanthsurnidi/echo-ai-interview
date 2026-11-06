@@ -1,0 +1,18 @@
+{
+  "initialBalance": 5000,
+  "creditsConsumed": 0,
+  "creditsRemaining": 5000,
+  "mockCreditsSaved": 1,
+  "history": [
+    {
+      "timestamp": "2026-11-02T14:50:44.928Z",
+      "type": "MOCK_OR_CACHED",
+      "service": "TIMBRE_V2_5_TTS",
+      "creditsSaved": 1,
+      "meta": {
+        "language": "te-IN",
+        "wordCount": 12
+      }
+    }
+  ]
+}

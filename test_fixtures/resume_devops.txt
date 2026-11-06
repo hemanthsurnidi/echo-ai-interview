@@ -1,0 +1,17 @@
+Priya Venkatesh
+Site Reliability & DevOps Engineer
+Email: priya.v@example.com
+GitHub: https://github.com/ops-lead/k8s-multi-cluster-helm
+
+SUMMARY
+SRE with deep expertise in Kubernetes orchestration, infrastructure as code with Terraform, and highly resilient CI/CD pipelines.
+
+TECHNICAL SKILLS
+Infrastructure & Cloud: Kubernetes, Docker, Terraform, AWS, Helm, Linux, Ansible
+Monitoring & SRE: Prometheus, Grafana, OpenTelemetry, ELK Stack
+Languages: Python, Go, Shell Scripting
+
+PROJECTS
+1. Multi-Cluster Kubernetes Helm Automation
+- Developed Helm charts and Terraform modules for multi-tenant EKS clusters with automated autoscaling.
+- Implemented zero-downtime rolling upgrades and robust disaster recovery automation.

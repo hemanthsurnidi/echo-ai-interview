@@ -1,0 +1,17 @@
+Aarav Sharma
+Machine Learning & AI Engineer
+Email: aarav.sharma@example.com
+GitHub: https://github.com/ai-dev/multilingual-rag-pipeline
+
+SUMMARY
+Applied AI and Machine Learning Engineer specializing in multilingual NLP, vector retrieval architectures, and transformer fine-tuning.
+
+TECHNICAL SKILLS
+Core AI/ML: PyTorch, TensorFlow, Scikit-Learn, Hugging Face Transformers, LangChain, FAISS
+Languages: Python, C++, SQL
+Data & Cloud: Pandas, NumPy, FastAPI, Docker, GCP Vertex AI, MLflow
+
+PROJECTS
+1. Multilingual RAG Retrieval Pipeline
+- Built an enterprise semantic search and question-answering pipeline supporting 5 Indian languages.
+- Optimized vector embedding latency using FAISS indexing with hierarchical navigable small-world graphs.
