@@ -11,7 +11,10 @@ import urllib.request
 import json
 from typing import Dict, Any, Optional
 
-import speech_recognition as sr
+try:
+    import speech_recognition as sr
+except ImportError:
+    sr = None
 from services.question_engine import QuestionEngine
 
 class PrismaService:
@@ -21,7 +24,7 @@ class PrismaService:
         self.api_key = os.getenv("GNANI_API_KEY", "")
         self.access_token = os.getenv("GNANI_ACCESS_TOKEN", "")
         self.app_id = os.getenv("GNANI_APP_ID", "")
-        self.recognizer = sr.Recognizer()
+        self.recognizer = sr.Recognizer() if sr else None
 
     def transcribe(
         self,
@@ -154,7 +157,7 @@ class PrismaService:
             }
 
         # 2. Transcribe real audio bytes if present
-        if audio_bytes and len(audio_bytes) > 200:
+        if sr and self.recognizer and audio_bytes and len(audio_bytes) > 200:
             try:
                 with sr.AudioFile(io.BytesIO(audio_bytes)) as source:
                     audio_data = self.recognizer.record(source)
